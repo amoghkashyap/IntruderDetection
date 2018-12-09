@@ -11,7 +11,7 @@ app = FlaskAPI(__name__)
 CORS(app)
 
 @app.route('/register',methods=['POST'])
-def processjson():
+def register():
     data = request.get_json()
     print(data)
     name = data['name']

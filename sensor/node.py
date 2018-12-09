@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 import time
 import os
 import requests
+import datetime
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -29,7 +30,7 @@ if __name__ == "__main__":
             print("Intruder Detected")
             captureImage()
             print("capture successful")
-            serverCalls("http://localhost:50010/register","amogh")
+            serverCalls("http://localhost:50010/update",{"name":"teamName","url":"http://192.168.1.102:8000/intruder.jpg","time":str(datetime.datetime.now())})
             ledTrigger()
         else:
             print("No Intruder")

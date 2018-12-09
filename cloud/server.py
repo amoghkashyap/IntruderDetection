@@ -5,6 +5,7 @@ from flask import json
 from flask import Response
 from flask import send_from_directory, send_file
 from flask_cors import CORS
+import plivo
 
 app = FlaskAPI(__name__)
 CORS(app)
@@ -13,6 +14,13 @@ CORS(app)
 def processjson():
     data = request.get_json()
     print(data)
+    name = data['name']
+    print (name)
+    client = plivo.RestClient(auth_id='MAOTM2ZTNMOWFKZTZJYT', auth_token='OGJiMmYwNWM1NmIzN2NjMjk3YWU3M2FiOWU2NjEy')
+    message_created = client.messages.create(
+    src='+917892143484',
+    dst='+918904655657',
+    text='Team '+name+' registered successfully')
     return jsonify({'result':'team registered successfully'})
 
 @app.route('/update',methods=['POST'])

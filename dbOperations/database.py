@@ -38,3 +38,10 @@ class CassandraOperations:
     def executeQuery(self,query):
         self.log.info("executing query : %s .."%query)
         self.session.execute(query)
+
+    def checkIfUserRegistered(self,teamName):
+        self.log.info("checking whether team:"+teamName+" is registered or not")
+        entries =  self.session.execute("SELECT * from workshop.student_entries where teamName='"+teamName+"';")
+        if not entries:
+            return False
+        return True
